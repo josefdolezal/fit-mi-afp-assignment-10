@@ -1,0 +1,26 @@
+{
+  "name": "currency-converter",
+  "version": "1.0.0",
+  "description": "Reactive currency converter",
+  "main": "index.js",
+  "repository": "git@github.com:josefdolezal/fit-mi-afp-assignment-10.git",
+  "author": "Josef Dolezal <pepik.ml@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "css-loader": "^0.28.11",
+    "elm": "^0.18.0",
+    "elm-webpack-loader": "^4.5.0",
+    "file-loader": "^1.1.11",
+    "style-loader": "^0.21.0",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.7.0",
+    "webpack-dev-server": "^3.1.4"
+  },
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server --port 7000"
+  },
+  "devDependencies": {
+    "webpack-cli": "^2.1.3"
+  }
+}
