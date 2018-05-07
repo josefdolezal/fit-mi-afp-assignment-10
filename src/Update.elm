@@ -51,7 +51,8 @@ unwrapRateResponse model response =
 updateCurrenciesToRate : RateValue -> List RateValue -> List CurrencyAmount -> List CurrencyAmount
 updateCurrenciesToRate initial rates amounts =
     let
-        pairs = pairRateValuesToCurrencies amounts rates
+        allRates = rates ++ [RateValue initial.code 1] -- Add missing
+        pairs = pairRateValuesToCurrencies amounts allRates
     in
     List.map (updateCurrencyAmountByRate initial) pairs
 
