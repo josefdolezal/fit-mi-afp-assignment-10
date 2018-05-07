@@ -1,14 +1,21 @@
 module Models exposing (..)
 
 type alias Model =
-    { currencies: List Currency
-    , autorefresh: Bool
+    { currencies : List CurrencyAmount
+    , autorefresh : Bool
+    , rate : Maybe RateValue
     }
 
 initialModel : Model
 initialModel =
     { currencies = []
     , autorefresh = False
+    , rate = Nothing
+    }
+
+type alias CurrencyAmount =
+    { currency: Currency
+    , amount: Maybe Float
     }
 
 type alias CurrencyCode =
