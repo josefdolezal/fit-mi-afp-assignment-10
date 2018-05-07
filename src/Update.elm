@@ -21,6 +21,9 @@ update msg model =
         
         Msgs.OnFetchRate response ->
             unwrapRateResponse model response
+        
+        Msgs.ToggleAutoRefresh ->
+            ({ model | autorefresh = not model.autorefresh }, Cmd.none)
 
 unwrapCurrenciesResponse : Model -> WebData (List Currency) -> (Model, Cmd Msg)
 unwrapCurrenciesResponse model response =

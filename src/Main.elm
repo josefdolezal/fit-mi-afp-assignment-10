@@ -7,6 +7,7 @@ import Update exposing (update)
 import Commands exposing (fetchCurrencies, fetchRates)
 import Msgs exposing (Msg)
 
+
 init : (Model, Cmd Msg)
 init =
     (initialModel, fetchCurrencies)

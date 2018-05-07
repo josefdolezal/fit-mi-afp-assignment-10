@@ -7,3 +7,4 @@ type Msg
     = OnFetchCurrencies (WebData (List Currency))
     | OnFetchRate (WebData Rate)
     | UpdateBase CurrencyCode String
+    | ToggleAutoRefresh
