@@ -1,4 +1,4 @@
-module Msgs exposing (Msg)
+module Msgs exposing (..)
 
 import Models exposing (Currency, Rate)
 import RemoteData exposing (WebData)

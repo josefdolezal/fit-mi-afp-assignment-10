@@ -1,16 +1,13 @@
 module Models exposing (..)
 
-import Dict exposing (Dict)
-import RemoteData exposing (WebData)
-
 type alias Model =
-    { currencies: WebData (List Currency)
+    { currencies: List Currency
     , autorefresh: Bool
     }
 
 initialModel : Model
 initialModel =
-    { currencies = RemoteData.Loading
+    { currencies = []
     , autorefresh = False
     }
 
@@ -29,4 +26,6 @@ type alias Rate =
     }
 
 type alias RateValue =
-    Dict CurrencyCode Float
+    { code : CurrencyCode
+    , rate : Float
+    }
