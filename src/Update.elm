@@ -24,6 +24,11 @@ update msg model =
         
         Msgs.ToggleAutoRefresh ->
             ({ model | autorefresh = not model.autorefresh }, Cmd.none)
+        
+        Msgs.AutoRefresh _ ->
+            case model.rate of
+                Just rate -> (model, fetchRates rate.code)
+                Nothing -> (model, Cmd.none)
 
 unwrapCurrenciesResponse : Model -> WebData (List Currency) -> (Model, Cmd Msg)
 unwrapCurrenciesResponse model response =
