@@ -47,5 +47,6 @@ module.exports = {
   devServer: {
     inline: true,
     stats: { colors: true },
+    headers: { "Access-Control-Allow-Origin": "*" }
   },
 };

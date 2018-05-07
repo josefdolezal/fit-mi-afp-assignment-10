@@ -1,4 +1,4 @@
-module Commands exposing (..)
+module Commands exposing (fetchCurrencies, fetchRates)
 
 import Http
 import Json.Decode as Decode
@@ -51,7 +51,7 @@ mapPairs list =
 request : String -> Decode.Decoder a -> Http.Request a
 request url decoder =
     let 
-        headers = [ Http.header "Authorization" "token SECRET_TOKEN" ]
+        headers = [ ]
     in
     Http.request
     { method = "GET"
@@ -79,4 +79,4 @@ requestUrl path =
 
 baseUrl : String
 baseUrl =
-    "https://dummy-currency-api.herokuapp.com"
+    "http://dummy-currency-api.herokuapp.com"
