@@ -19,6 +19,13 @@ Visit: https://dummy-currency-api.herokuapp.com
 
 API key is the sha1 hash of string *MI-AFP* (you can use http://www.sha1-online.com, we don't want to make it totally public).
 
+### Setup
+
+1) In project directory, copy the `.env-default` into `.env` file
+2) In `.env`, fill in your environment cofiguration
+2) Run `yarn install`
+3) Run `yarn dev`, the app is now running at `localhost:7000`
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE)
