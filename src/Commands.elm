@@ -4,18 +4,18 @@ import Http
 import Json.Decode as Decode
 import Json.Decode.Pipeline exposing(decode, required)
 import Msgs exposing(Msg)
-import Models exposing (CurrencyCode, Currency, Rate, RateValue)
+import Models exposing (CurrencyCode, Currency, Rate, RateValue, Flags)
 import RemoteData
 
-fetchCurrencies : Cmd Msg
-fetchCurrencies =
-    request fetchCurrenciesUrl currenciesDecoder
+fetchCurrencies : Flags -> Cmd Msg
+fetchCurrencies flags =
+    request flags "currencies" currenciesDecoder
         |> RemoteData.sendRequest
         |> Cmd.map  Msgs.OnFetchCurrencies
 
-fetchRates : CurrencyCode -> Cmd Msg
-fetchRates code =
-    request (fetchRatesUrl code) rateDecoder
+fetchRates : Flags -> CurrencyCode -> Cmd Msg
+fetchRates flags code =
+    request flags ("exchange-rates/" ++ code) rateDecoder
         |> RemoteData.sendRequest
         |> Cmd.map  Msgs.OnFetchRate
 
@@ -48,35 +48,21 @@ mapPairs list =
 
 -- Requests
 
-request : String -> Decode.Decoder a -> Http.Request a
-request url decoder =
+request : Flags -> String -> Decode.Decoder a -> Http.Request a
+request flags path decoder =
     let 
-        headers = [ ]
+        headers = [ authorization flags ]
     in
     Http.request
     { method = "GET"
     , headers = headers
-    , url = url
+    , url = flags.url ++ "/" ++ path
     , body = Http.emptyBody
     , expect = Http.expectJson decoder
     , timeout = Nothing
     , withCredentials = False
     }
 
--- URLs
-
-fetchCurrenciesUrl : String
-fetchCurrenciesUrl =
-    requestUrl "currencies"
-
-fetchRatesUrl : CurrencyCode -> String
-fetchRatesUrl code =
-    requestUrl ("exchange-rates/" ++ code)
-
-requestUrl : String -> String
-requestUrl path =
-    baseUrl ++ "/" ++ path
-
-baseUrl : String
-baseUrl =
-    "http://dummy-currency-api.herokuapp.com"
+authorization : Flags -> Http.Header
+authorization flags =
+    Http.header "Authorization" ("token " ++ flags.authToken)

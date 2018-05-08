@@ -8,6 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "css-loader": "^0.28.11",
+    "dotenv": "^5.0.1",
     "elm": "^0.18.0",
     "elm-webpack-loader": "^4.5.0",
     "file-loader": "^1.1.11",

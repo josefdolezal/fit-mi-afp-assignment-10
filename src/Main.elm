@@ -1,7 +1,7 @@
 module Main exposing (..)
 
-import Html exposing (program)
-import Models exposing (Model, initialModel)
+import Html exposing (programWithFlags)
+import Models exposing (Model, Flags, initialModel)
 import View exposing (view)
 import Update exposing (update)
 import Commands exposing (fetchCurrencies, fetchRates)
@@ -9,9 +9,9 @@ import Msgs exposing (Msg)
 import Time exposing (Time, second)
 
 
-init : (Model, Cmd Msg)
-init =
-    (initialModel, fetchCurrencies)
+init : Flags -> (Model, Cmd Msg)
+init flags =
+    (initialModel flags, fetchCurrencies flags)
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
@@ -19,9 +19,9 @@ subscriptions model =
     then Time.every (5 * second) Msgs.AutoRefresh
     else Sub.none
 
-main : Program Never Model Msg
+main : Program Flags Model Msg
 main =
-    program
+    programWithFlags
         { init = init
         , view = view
         , update = update

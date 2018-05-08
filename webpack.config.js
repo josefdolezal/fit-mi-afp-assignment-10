@@ -1,4 +1,7 @@
 var path = require("path");
+var webpack = require('webpack');
+
+require('dotenv').config();
 
 module.exports = {
   entry: {
@@ -49,4 +52,8 @@ module.exports = {
     stats: { colors: true },
     headers: { "Access-Control-Allow-Origin": "*" }
   },
+
+  plugins: [
+    new webpack.EnvironmentPlugin(["CURRENCY_BASE_URL", "CURRENCY_AUTH_TOKEN"])
+  ]
 };

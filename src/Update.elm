@@ -14,7 +14,7 @@ update msg model =
                 fValue = Result.withDefault 0 (String.toFloat value)
                 newRate = RateValue newBase fValue
             in
-            ({ model | rate = Just newRate }, fetchRates newRate.code)
+            ({ model | rate = Just newRate }, fetchRates model.flags newRate.code)
 
         Msgs.OnFetchCurrencies response ->
             unwrapCurrenciesResponse model response
@@ -27,7 +27,7 @@ update msg model =
         
         Msgs.AutoRefresh _ ->
             case model.rate of
-                Just rate -> (model, fetchRates rate.code)
+                Just rate -> (model, fetchRates model.flags rate.code)
                 Nothing -> (model, Cmd.none)
 
 unwrapCurrenciesResponse : Model -> WebData (List Currency) -> (Model, Cmd Msg)

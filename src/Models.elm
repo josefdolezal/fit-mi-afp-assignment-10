@@ -4,13 +4,20 @@ type alias Model =
     { currencies : List CurrencyAmount
     , autorefresh : Bool
     , rate : Maybe RateValue
+    , flags: Flags
     }
 
-initialModel : Model
-initialModel =
+initialModel : Flags -> Model
+initialModel flags =
     { currencies = []
     , autorefresh = False
     , rate = Nothing
+    , flags = flags
+    }
+
+type alias Flags =
+    { url: String
+    , authToken: String
     }
 
 type alias CurrencyAmount =
